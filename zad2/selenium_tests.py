@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+from random import randrange
 
 
 class ReservedTest:
@@ -31,7 +32,7 @@ class ReservedTest:
         driver.find_element_by_id("email_id").send_keys(self.email)
         driver.find_element_by_id("firstname_id").send_keys(self.first_name)
         driver.find_element_by_id("lastname_id").send_keys(self.last_name)
-        driver.find_element_by_id("password_id").send_keys("Testowy123")
+        driver.find_element_by_id("password_id").send_keys(self.password)
         driver.find_element_by_xpath('//*[@id="loginRegisterRoot"]/div/div[2]/div/form/button').click()
 
     def login_user(self):
@@ -52,11 +53,11 @@ class ReservedTest:
     def logout_user(self):
         driver = self.driver
         action = ActionChains(driver)
-        driver.get("https://www.reserved.com/")
+        driver.get("https://www.reserved.com/pl/pl")
 
-        newsletter_popup = driver.find_element_by_id('newsletterContainer')
-        if (newsletter_popup):
-            driver.find_element_by_xpath('//*[@id="newsletterContainer"]/div[1]').click()
+        # newsletter_popup = driver.find_element_by_id('newsletterContainer')
+        # if newsletter_popup:
+        #     driver.find_element_by_xpath('//*[@id="newsletterContainer"]/div[1]').click()
 
         account_menu = driver.find_element_by_xpath('//*[@id="headerWrapper"]/div/div[2]/button[1]')
         action.move_to_element(account_menu).perform()
@@ -84,10 +85,12 @@ class MediaMarkt:
         driver.find_element_by_xpath('//*[@id="js-cart-list-content"]/div/section/div/div[2]/a').click()
 
 
-drivers = [webdriver.Chrome('/usr/local/bin/chromedriver'), webdriver.Firefox('path'), webdriver.Opera('path')]
+drivers = [webdriver.Chrome('/usr/local/bin/chromedriver'), webdriver.Firefox('/usr/local/bin/firefox'),
+           webdriver.Opera('/usr/local/bin/opera')]
 
 for d in drivers:
-    re = ReservedTest('wojciech', 'iracki', 'marcinxbiedrzycki3@gmail.com', 'admin123', d)
+    email = "testowyemail" + str(int(randrange(5000))) + "@gmail.com"
+    re = ReservedTest('wojciech', 'iracki', email, 'Testowe123', d)
     try:
         re.store_selector_shown()
         re.register_user()
