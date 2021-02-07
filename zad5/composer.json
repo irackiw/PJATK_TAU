@@ -1,0 +1,23 @@
+{
+    "name": "s13066/behat",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Wojciech Iracki",
+            "email": "s13066@pjwstk.edu.pl"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "behat/behat": "^3.8",
+        "phpunit/phpunit": "^9.5"   
+    },
+    "scripts": {
+        "behat": "bin/behat"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
